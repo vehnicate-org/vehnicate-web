@@ -18,10 +18,11 @@ const Team = () => {
   const engineersRef = useRef(null);
 
   const leaders = [
+    
     {
-      id: 1,
+      id: 2,
       name: "Sai Siddharth S.E",
-      role: "Co founder & CEO",
+      role: "Co-founder & CEO",
       image: "/siddharth.jpg",
       social: {
         github: "https://github.com/hn-sottallu",
@@ -30,7 +31,7 @@ const Team = () => {
       },
     },
     {
-      id: 2,
+      id: 3,
       name: "Hari Karan ",
       role: "Co founder & CFO",
       image: "/harikaran.jpg",
@@ -41,7 +42,7 @@ const Team = () => {
       },
     },
     {
-      id: 3,
+      id: 4,
       name: "Mythrayi ",
       role: "Chief Advisor",
       image: "/mythrayi.jpg",
@@ -100,10 +101,10 @@ const Team = () => {
         email: "nandumahesh2004@gmail.com",
       },
     },
-    {
-      id: 9,
+{
+      id: 1,
       name: "Pragya Sekar",
-      role: "ML Developer",
+      role: "Co-Founder & CTO",
       image: "/pragya.jpg",
       social: {
         github: "https://github.com/pragy10",
