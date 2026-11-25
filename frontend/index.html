@@ -2,9 +2,34 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/hn-logo.png" />
+    <link rel="icon" type="image/png" href="/vehnicate_favicon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Ledger&display=swap"
+      rel="stylesheet"
+    />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>vehnicate</title>
+    <meta
+      name="description"
+      content="vehnicate turns your daily drive into Ellars. an android app that maps potholes and speedbreakers and rewards you for every kilometre."
+    />
+    <meta property="og:title" content="vehnicate — get rewarded for every pothole you drive over" />
+    <meta
+      property="og:description"
+      content="drive normally. the app maps road defects. you earn Ellars you can actually spend."
+    />
+    <meta property="og:type" content="website" />
+    <title>vehnicate — get rewarded for every pothole you drive over</title>
+    <script>
+      (function () {
+        var t = localStorage.getItem('vehnicate-theme');
+        if (!t) {
+          t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+        document.documentElement.setAttribute('data-theme', t);
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>

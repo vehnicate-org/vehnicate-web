@@ -1,65 +1,36 @@
-import { Routes, Route, useLocation } from "react-router-dom";
-import { AnimatePresence, motion } from "framer-motion";
-import Home from "./pages/Home";
-import WaitlistPage from "./pages/WaitlistPage";
-import MapPage from "./pages/MapPage";
-import "./styles/globals.css";
-
-function AnimatedRoutes() {
-  const location = useLocation();
-
-  return (
-    <AnimatePresence mode="wait">
-      <Routes location={location} key={location.pathname}>
-        <Route
-          path="/"
-          element={
-            <PageWrapper>
-              <Home />
-            </PageWrapper>
-          }
-        />
-        <Route
-          path="/waitlist"
-          element={
-            <PageWrapper>
-              <WaitlistPage />
-            </PageWrapper>
-          }
-        />
-        <Route
-          path="/map"
-          element={
-            <PageWrapper>
-              <MapPage />
-            </PageWrapper>
-          }
-        />
-      </Routes>
-    </AnimatePresence>
-  );
-}
-
-function PageWrapper({ children }) {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -20 }}
-      transition={{ duration: 0.4, ease: "easeInOut" }}
-      className="min-h-screen"
-    >
-      {children}
-    </motion.div>
-  );
-}
+import { Routes, Route } from 'react-router-dom'
+import Layout from './components/common/Layout'
+import Home from './pages/Home'
+import What from './pages/What'
+import Why from './pages/Why'
+import AppPage from './pages/AppPage'
+import Ellar from './pages/Ellar'
+import Vmn from './pages/Vmn'
+import VmnHowPage from './pages/VmnHowPage'
+import MapPage from './pages/MapPage'
+import Products from './pages/Products'
+import Contact from './pages/Contact'
+import WaitlistPage from './pages/WaitlistPage'
 
 function App() {
   return (
-    <div className="App">
-      <AnimatedRoutes />
-    </div>
-  );
+    <Routes>
+      <Route element={<Layout />}>
+        <Route path="/" element={<Home />} />
+        <Route path="/what" element={<What />} />
+        <Route path="/why" element={<Why />} />
+        <Route path="/app" element={<AppPage />} />
+        <Route path="/ellar" element={<Ellar />} />
+        <Route path="/vmn" element={<Vmn />} />
+        <Route path="/vmn/how-it-works" element={<VmnHowPage />} />
+        <Route path="/map" element={<MapPage />} />
+        <Route path="/products" element={<Products />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/waitlist" element={<WaitlistPage />} />
+        <Route path="*" element={<Home />} />
+      </Route>
+    </Routes>
+  )
 }
 
-export default App;
+export default App

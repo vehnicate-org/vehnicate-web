@@ -7,32 +7,43 @@ export default {
   theme: {
     extend: {
       colors: {
-        'vehnicate': {
-          'black': '#000000',
-          'purple': '#32055C',
-          'pink': '#BE326C',
-        }
-      },
-      backgroundImage: {
-        'vehnicate-gradient': 'linear-gradient(135deg, #32055C 0%, #BE326C 100%)',
-        'vehnicate-gradient-reverse': 'linear-gradient(135deg, #BE326C 0%, #32055C 100%)',
-        'vehnicate-full-gradient': 'linear-gradient(135deg, #000000 0%, #32055C 50%, #BE326C 100%)',
-        'gradient-radial': 'radial-gradient(ellipse at center, var(--tw-gradient-stops))',
+        bg: 'var(--bg)',
+        subtle: 'var(--bg-subtle)',
+        elevated: 'var(--bg-elevated)',
+        ink: 'var(--text)',
+        body: 'var(--text-body)',
+        muted: 'var(--text-muted)',
+        line: 'var(--border)',
+        lineStrong: 'var(--border-strong)',
+        btn: 'var(--btn-bg)',
+        btnHover: 'var(--btn-bg-hover)',
+        onAccent: 'var(--on-accent)',
+        link: 'var(--link)',
+        linkHover: 'var(--link-hover)',
+        defect: {
+          pothole: 'var(--defect-pothole, #D92D20)',
+          speedbreak: 'var(--defect-speedbreak, #DC6803)',
+        },
+        brand: {
+          purple: 'var(--brand-purple)',
+          pink: 'var(--brand-pink)',
+          purpleSoft: 'var(--brand-purple-soft)',
+          pinkSoft: 'var(--brand-pink-soft)',
+        },
       },
       fontFamily: {
-        'sans': ['Inter', 'system-ui', 'sans-serif'],
-        'alumni' : [ 'Alumni Sans Pinstripe', 'sans-serif'],
-        'michroma': ["Michroma", 'sans-serif'],
-        'ledger' : ["Ledger", 'serif']
+        sans: ['Inter', 'system-ui', '-apple-system', '"Segoe UI"', 'Roboto', 'sans-serif'],
+        ledger: ['Ledger', 'Georgia', 'serif'],
+        mono: ['ui-monospace', 'SFMono-Regular', 'Menlo', 'monospace'],
       },
-      animation: {
-        'float': 'float 6s ease-in-out infinite',
-        'float3D': 'float3D 6s ease-in-out infinite',
-        'roadMove': 'roadMove 8s linear infinite',
-        'dashMove': 'dashMove 2s linear infinite',
-        'particleFloat': 'particleFloat 10s linear infinite',
-        'gradient-shift': 'gradient-shift 15s ease infinite',
-      }
+      backgroundImage: {
+        'brand-gradient': 'var(--gradient-brand)',
+        'brand-gradient-reverse': 'var(--gradient-brand-reverse)',
+        'brand-full': 'var(--gradient-full)',
+      },
+      maxWidth: {
+        container: '1120px',
+      },
     },
   },
   plugins: [],

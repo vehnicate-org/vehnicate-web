@@ -1,27 +1,24 @@
-export const COMPANY_INFO = {
-  name: 'vehnicate',
-  tagline: 'Gamified Driving Ecosystem',
-  description: 'We build an ecosystem to support gamified driving.',
-  social: {
-    linkedin: 'https://linkedin.com/company/vehnicate', // Replace with your actual LinkedIn
-    instagram: 'https://instagram.com/vehnicate', // Replace with your actual Instagram
-    email: 'vehnicate.web@gmail.com'
-  }
+export const LINKS = {
+  app: 'https://play.google.com/store/apps/details?id=com.vehnway.app&pcampaignid=web_share',
+  dashboard: 'https://dashboard.vehnicate.com/',
+  linkedin: 'https://www.linkedin.com/company/vehnicate/',
+  youtube: 'https://www.youtube.com/channel/UCrgjnbIM-6sNmaLem3Qmntg',
+  instagram: 'https://www.instagram.com/vehnicate/',
+  email: 'vehnicate.web@gmail.com',
+  phone: '+91 77081 61551',
 }
 
-export const COLORS = {
-  primary: {
-    black: '#000000',
-    purple: '#32055C', 
-    pink: '#BE326C'
-  }
-}
+export const NAV_LINKS = [
+  { name: 'What', href: '/what' },
+  { name: 'Why', href: '/why' },
+  { name: 'App', href: '/app' },
+  { name: 'Ellar', href: '/ellar' },
+  { name: 'vMN', href: '/vmn' },
+  { name: 'Products', href: '/products' },
+  { name: 'Contact', href: '/contact' },
+]
 
-export const NAVIGATION = [
-  { name: 'Home', href: '#home' },
-  { name: 'About', href: '#about' },
-  { name: 'How It Works', href: '#working' },
-  { name: 'Team', href: '#team' },
-  { name: 'Community', href: '#community' },
-  { name: 'Contact', href: '#contact' }
+export const PAGE_LINKS = [
+  { name: 'home', href: '/' },
+  ...NAV_LINKS,
 ]
