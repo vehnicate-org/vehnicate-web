@@ -33,7 +33,6 @@ const WaitlistPage = () => {
         >
           <ArrowLeft size={15} /> back to home
         </Link>
-        <span className="label">waitlist</span>
         <h1 className="display-heading waitlist-heading">
           be the first to know
         </h1>

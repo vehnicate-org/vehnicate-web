@@ -44,7 +44,6 @@ const Why = () => {
       {/* STORY */}
       <section className="section-pad interior-hero why-hero">
         <div className="container-x max-w-[860px]">
-          <span className="label">why we care</span>
           <h1 className="display-heading why-heading">
             every pothole you dodge is someone else's near-miss. someone is
             waiting for their <CyclingWord /> to return home safely.

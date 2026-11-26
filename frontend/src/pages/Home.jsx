@@ -1,5 +1,5 @@
 import { motion, useReducedMotion } from 'framer-motion'
-import { ArrowDown, ArrowRight, ArrowUpRight, AudioLines, CircleDot, MapPin, ShieldCheck, Smartphone, Sparkles, Zap } from 'lucide-react'
+import { ArrowRight, ArrowUpRight, CircleDot, MapPin, ShieldCheck, Smartphone, Sparkles, Zap, ChartNoAxesCombined } from 'lucide-react'
 import MetricStrip from '../components/ui/MetricStrip'
 import Pipeline from '../components/ui/Pipeline'
 import { PrimaryButton, SecondaryButton, TextLink } from '../components/ui/Button'
@@ -48,7 +48,6 @@ const Home = () => (
       <div className="hero-orb hero-orb-two" aria-hidden="true" />
       <div className="container-x hero-layout relative z-10 grid items-center gap-10 py-16 md:min-h-[670px] md:grid-cols-[1.04fr_.96fr] md:py-20">
         <motion.div initial="hidden" animate="show" variants={{ show: { transition: { staggerChildren: 0.12 } } }}>
-          <motion.div variants={rise} className="home-hero-kicker">ROAD INTELLIGENCE <span>—</span> 01</motion.div>
           <motion.h1 variants={rise} className="hero-title mt-5 max-w-[720px] text-[clamp(3.3rem,7vw,6.4rem)] leading-[.93] tracking-[-.065em]">
             Every road<br />has a <span className="hero-gradient">story.</span>
           </motion.h1>
@@ -70,15 +69,12 @@ const Home = () => (
           <div className="hero-art-grid" />
           <img src="/gggyrate.svg" alt="" className="hero-twirl hero-art-ring" />
           <img src="/pothole_speedbreaker_ellar.png" alt="Pothole, speedbreaker and Ellar illustration" className="hero-art-main" />
-          <div className="hero-art-caption"><span>01 / 04</span><span>the road is talking <AudioLines size={14} /></span></div>
         </motion.div>
       </div>
-      <a href="#impact" className="scroll-cue" aria-label="Scroll to discover"><span>scroll to discover</span><ArrowDown size={14} /></a>
     </section>
 
     <section id="impact" className="metrics-section">
       <div className="container-x py-8 md:py-10">
-        <div className="metrics-heading"><span className="eyebrow-dot" /> a growing network of road mates</div>
         <MetricStrip items={STATS} />
       </div>
     </section>
@@ -86,7 +82,6 @@ const Home = () => (
     <section className="section-pad story-section">
       <div className="container-x">
         <Reveal className="section-intro">
-          <span className="label">small actions. real impact.</span>
           <h2 className="display-heading">Your commute can<br className="hidden sm:block" /> do a little more.</h2>
           <p>One drive helps build a clearer picture of the roads we all share. No extra effort, just a smarter way to get there.</p>
         </Reveal>
@@ -112,7 +107,6 @@ const Home = () => (
     <section className="how-section section-pad">
       <div className="container-x grid gap-10 md:grid-cols-[.8fr_1.2fr] md:items-start">
         <Reveal>
-          <span className="label">easy as the open road</span>
           <h2 className="display-heading">A better drive<br />starts here.</h2>
           <p className="mt-4 max-w-sm leading-7">Set it up once. Then let your everyday journeys do the good work.</p>
           <TextLink href="/what" className="impact-link mt-6">How it works <ArrowRight size={15} /></TextLink>
@@ -125,20 +119,21 @@ const Home = () => (
 
     <section className="platform-section section-pad">
       <div className="container-x">
-        <Reveal className="platform-heading"><div><span className="label">one connected ecosystem</span><h2 className="display-heading">Built for the<br />whole road ahead.</h2></div><p>From the driver's seat to the city dashboard, every part of vehnicate moves us forward.</p></Reveal>
+        <Reveal className="platform-heading"><div><h2 className="display-heading">Built for the<br />whole road ahead.</h2></div><p>From the driver's seat to the city dashboard, every part of vehnicate moves us forward.</p></Reveal>
         <div className="platform-grid mt-10">
           <Reveal className="platform-card platform-map" delay={.02}><span className="platform-icon"><MapPin size={18} /></span><div><span className="card-index">01 / MAPS</span><h3>See the bigger picture.</h3><p>Road signals, visualised for everyone.</p></div><img src="/roads.png" alt="vehnicate road map" /><TextLink href="/map" className="card-arrow" aria-label="Explore maps"><ArrowUpRight size={18} /></TextLink></Reveal>
           <Reveal className="platform-card platform-app" delay={.08}><span className="platform-icon"><Smartphone size={18} /></span><span className="card-index">02 / DRIVER APP</span><h3>Just drive. We’ll handle the rest.</h3><p>Road insights, right from your phone.</p><div className="mini-phone"><div className="phone-camera" /><span className="phone-label">YOUR DRIVE<br /><b>IN MOTION</b></span><div className="phone-wave"><i /><i /><i /><i /><i /><i /><i /></div></div><TextLink href="/app" className="card-arrow" aria-label="Explore the app"><ArrowUpRight size={18} /></TextLink></Reveal>
           <Reveal className="platform-card platform-ellar" delay={.14}><span className="platform-icon"><Sparkles size={18} /></span><span className="card-index">03 / ELLAR</span><h3>A little good<br />comes around.</h3><p>Turn better driving into meaningful rewards.</p><div className="mini-ellar">e<span>✳</span></div><TextLink href="/ellar" className="card-arrow" aria-label="Discover Ellar"><ArrowUpRight size={18} /></TextLink></Reveal>
           <Reveal className="platform-card platform-vmn" delay={.2}><span className="platform-icon"><Zap size={18} /></span><span className="card-index">04 / MERCHANT NETWORK</span><h3>Good things, closer.</h3><p>Discover local businesses in the vehnicate network.</p><div className="merchant-lines"><i /><i /><i /></div><TextLink href="/vmn" className="card-arrow" aria-label="Explore the merchant network"><ArrowUpRight size={18} /></TextLink></Reveal>
+          <Reveal className="platform-card platform-dashboard" delay={.26}><span className="platform-icon"><ChartNoAxesCombined size={18} /></span><span className="card-index">05 / ANALYTICS DASHBOARD</span><h3>Road data, in context.</h3><p>Explore network-level insights and road activity.</p><div className="dashboard-bars"><i /><i /><i /><i /><i /></div><TextLink href="https://dashboard.vehnicate.com/" external className="card-arrow" aria-label="Open analytics dashboard"><ArrowUpRight size={18} /></TextLink></Reveal>
         </div>
-        <Reveal className="trust-strip mt-5"><ShieldCheck size={18} /><span><b>Privacy comes standard.</b> Video is processed on-device. Your trips stay yours.</span><TextLink href="/why">Our approach <ArrowRight size={14} /></TextLink></Reveal>
+        <Reveal className="trust-strip mt-5"><ShieldCheck size={18} /><span><b>Privacy comes standard.</b> Video is processed on-device. Your trips stay yours.</span><TextLink href="/why" className="impact-link">Our approach <ArrowRight size={14} /></TextLink></Reveal>
       </div>
     </section>
 
     <section className="closing-section">
       <div className="closing-glow" />
-      <Reveal className="container-x closing-content"><span className="label">MAKE EVERY DRIVE MATTER</span><h2>Let’s make the<br /><span className="hero-gradient">road better.</span></h2><p>Join the people turning everyday drives into a better way forward.</p><PrimaryButton href={LINKS.app} external className="hero-primary">Get started <ArrowUpRight size={16} /></PrimaryButton></Reveal>
+      <Reveal className="container-x closing-content"><h2>Let’s make the<br /><span className="hero-gradient">road better.</span></h2><p>Join the people turning everyday drives into a better way forward.</p><PrimaryButton href={LINKS.app} external className="hero-primary">Get started <ArrowUpRight size={16} /></PrimaryButton></Reveal>
       <div className="closing-art" aria-hidden="true"><img src="/gggyrate.svg" alt="" /></div>
     </section>
   </div>

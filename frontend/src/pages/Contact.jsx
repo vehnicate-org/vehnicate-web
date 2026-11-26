@@ -59,7 +59,6 @@ const Contact = () => {
     <section className="section-pad interior-page interior-contact">
       <div className="container-x contact-layout">
         <div className="contact-intro">
-          <span className="label">CONTACT</span>
           <h1 className="display-heading contact-heading">Talk to the Vehnicate team.</h1>
           <p>Questions about the app, interested in the merchant network, or spotted something we should know about? Send us a note.</p>
           <div className="contact-details">

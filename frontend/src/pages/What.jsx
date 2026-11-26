@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import { ArrowDown, ArrowRight, Check, CircleDot, Smartphone, Wallet, Camera, MapPin } from 'lucide-react'
 import FaqAccordion from '../components/ui/FaqAccordion'
 import { PrimaryButton } from '../components/ui/Button'
@@ -20,6 +21,7 @@ const FAQ_ITEMS = [
 
 const What = () => {
   const [active, setActive] = useState(0)
+  const reduceMotion = useReducedMotion()
   useEffect(() => {
     const nodes = STEPS.map((step) => document.getElementById(step.id)).filter(Boolean)
     const observer = new IntersectionObserver((entries) => {
@@ -35,7 +37,6 @@ const What = () => {
     <div className="interior-page interior-what">
       <section className="section-pad interior-hero">
         <div className="container-x">
-          <span className="label">HOW IT WORKS</span>
           <h1 className="display-heading max-w-3xl">A better drive starts with one small setup.</h1>
           <p className="interior-lede mt-5 max-w-[60ch]">Set up Vehnicate once. Then your everyday journeys help map road defects, and confirmed observations earn you Ellars.</p>
           <a className="inline-flex items-center gap-2 mt-7 text-sm" href="#setup" style={{ color: 'var(--text)' }}>See the four steps <ArrowDown size={15} /></a>
@@ -44,43 +45,41 @@ const What = () => {
 
       <section id="setup" className="setup-section border-t" style={{ borderColor: 'var(--border)' }}>
         <div className="container-x setup-layout">
-          <aside className="setup-aside">
-            <span className="label">YOUR FIRST DRIVE</span>
-            <h2 className="display-heading">Four steps.<br />Then just drive.</h2>
-            <p>Follow along as each step moves into place.</p>
-            <nav aria-label="Setup steps" className="setup-progress">
-              {STEPS.map((step, index) => (
-                <a key={step.id} href={`#${step.id}`} className={index === active ? 'active' : ''}>
-                  <span>{index < active ? <Check size={13} /> : step.n}</span>{step.title}
-                </a>
-              ))}
-            </nav>
-          </aside>
-          <div className="setup-stack">
-            {STEPS.map((step, index) => {
-              const Icon = step.icon
-              return (
-                <article id={step.id} key={step.id} data-step-index={index} className="setup-stage scroll-mt-28" style={{ '--step-index': index }}>
-                  <div className={`setup-card ${index === active ? 'is-current' : ''}`}>
-                    <div className="setup-card-copy">
-                      <div className="setup-card-meta"><span>{step.n} / 04</span><Icon size={17} /></div>
-                      <h3>{step.title}</h3>
-                      <p>{step.text}</p>
-                      <div className="setup-note"><CircleDot size={14} />{step.note}</div>
-                      <a href="#compare" className="setup-next">{index === 3 ? 'Compare setups' : 'Next step'} <ArrowRight size={15} /></a>
-                    </div>
-                    <div className="setup-card-visual"><img src={step.image} alt={step.alt} loading={index ? 'lazy' : 'eager'} /><span className="visual-index">VEHNICATE / {step.n}</span></div>
-                  </div>
+          <div className="setup-story-heading">
+            <h2 className="display-heading">From setup to<br />your first Ellar.</h2>
+            <p>Four simple steps turn everyday drives into useful road data and rewards.</p>
+          </div>
+          <div className="setup-story-grid">
+            <div className="setup-story-steps">
+              <div className="setup-progress-track" aria-hidden="true"><motion.span animate={{ scaleY: (active + 1) / STEPS.length }} transition={{ duration: reduceMotion ? 0 : .45, ease: 'easeOut' }} /></div>
+              {STEPS.map((step, index) => {
+                const Icon = step.icon
+                return <article id={step.id} key={step.id} data-step-index={index} className={`setup-story-step ${active === index ? 'is-current' : ''}`}>
+                  <div className="setup-story-step-meta"><span>{step.n} / 04</span><Icon size={17} /></div>
+                  <h3>{step.title}</h3><p>{step.text}</p>
+                  <div className="setup-note"><CircleDot size={14} />{step.note}</div>
+                  <div className="setup-mobile-visual"><img src={step.image} alt={step.alt} loading={index ? 'lazy' : 'eager'} /></div>
                 </article>
-              )
-            })}
+              })}
+            </div>
+            <div className="setup-showcase-sticky">
+              <div className="setup-showcase-window">
+                <AnimatePresence mode="wait" initial={false}>
+                  <motion.div key={active} className="setup-showcase-frame" initial={reduceMotion ? { opacity: 1 } : { opacity: 0, y: 18, scale: .985 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={reduceMotion ? { opacity: 1 } : { opacity: 0, y: -12, scale: .99 }} transition={{ duration: reduceMotion ? 0 : .42, ease: [.22, 1, .36, 1] }}>
+                    <img src={STEPS[active].image} alt={STEPS[active].alt} />
+                    <div className="setup-showcase-caption"><span>VEHNICATE / {STEPS[active].n}</span><strong>{STEPS[active].title}</strong></div>
+                  </motion.div>
+                </AnimatePresence>
+              </div>
+              <div className="setup-showcase-pagination" aria-label={`Step ${active + 1} of 4`}>{STEPS.map((step, index) => <span key={step.id} className={active === index ? 'active' : ''} />)}</div>
+            </div>
           </div>
         </div>
       </section>
 
       <section id="compare" className="compare-section border-t" style={{ borderColor: 'var(--border)' }}>
         <div className="container-x section-pad">
-          <div className="compare-heading"><div><span className="label">PICK YOUR SETUP</span><h2 className="display-heading">Pocket or mounted.<br />Your call.</h2></div><p>Both work. A clear view of the road helps the app spot defects more reliably, and earns a higher trip multiplier.</p></div>
+          <div className="compare-heading"><div><h2 className="display-heading">Pocket or mounted.<br />Your call.</h2></div><p>Both work. A clear view of the road helps the app spot defects more reliably, and earns a higher trip multiplier.</p></div>
           <div className="compare-cards">
             <article className="compare-card pocket-card"><div className="compare-card-top"><span className="setup-icon"><Smartphone size={19} /></span><span className="compare-kicker">SIMPLE SETUP</span></div><h3>Phone in pocket</h3><p>Keep your phone with you. The app can still run during your trip.</p><div className="compare-rate"><strong>1×</strong><span>standard Ellar rate</span></div><ul><li><Check size={15} />No mount needed</li><li><Check size={15} />Works in the background</li><li className="muted"><CircleDot size={15} />Limited camera view</li></ul></article>
             <article className="compare-card mounted-card"><div className="compare-card-top"><span className="setup-icon"><Camera size={19} /></span><span className="compare-kicker">RECOMMENDED</span></div><h3>Phone mounted</h3><p>Secure your phone with the camera facing the road for a clearer view.</p><div className="compare-rate"><strong>2×</strong><span>Ellars on mounted trips</span></div><ul><li><Check size={15} />Clearer road view</li><li><Check size={15} />Better defect detection</li><li><Check size={15} />Double the trip multiplier</li></ul></article>
@@ -91,12 +90,12 @@ const What = () => {
 
       <section id="faq" className="faq-section border-t" style={{ borderColor: 'var(--border)' }}>
         <div className="container-x section-pad faq-layout">
-          <div><span className="label">GOOD QUESTIONS</span><h2 className="display-heading">Questions drivers<br />actually ask.</h2><p>Clear answers about the app, your phone and your privacy.</p></div>
+          <div><h2 className="display-heading">Questions drivers<br />actually ask.</h2><p>Clear answers about the app, your phone and your privacy.</p></div>
           <FaqAccordion items={FAQ_ITEMS} />
         </div>
       </section>
 
-      <section className="section-pad what-cta"><div className="container-x"><div><span className="label">READY FOR YOUR FIRST DRIVE?</span><h2>Make the kilometres count.</h2></div><PrimaryButton href={LINKS.app} external>Get the app <ArrowRight size={16} /></PrimaryButton></div></section>
+      <section className="section-pad what-cta"><div className="container-x"><div><h2>Make the kilometres count.</h2></div><PrimaryButton href={LINKS.app} external>Get the app <ArrowRight size={16} /></PrimaryButton></div></section>
     </div>
   )
 }

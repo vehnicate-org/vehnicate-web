@@ -74,8 +74,8 @@ const Nav = () => {
             href={LINKS.app}
             target="_blank"
             rel="noopener noreferrer"
-            className="hidden rounded-md px-4 py-2 text-[0.875rem] font-semibold sm:block"
-            style={{ background: 'var(--gradient-brand)', color: 'var(--on-brand)' }}
+            className="hidden overflow-hidden rounded-full px-4 py-2 text-[0.875rem] font-semibold sm:block"
+            style={{ backgroundImage: 'var(--gradient-cta)', color: 'var(--on-brand)' }}
           >
             Get the app
           </a>
@@ -111,8 +111,8 @@ const Nav = () => {
               href={LINKS.app}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-3 rounded-md px-4 py-3 text-center text-[0.9375rem] font-semibold"
-              style={{ background: 'var(--gradient-brand)', color: 'var(--on-brand)' }}
+              className="mt-3 overflow-hidden rounded-full px-4 py-3 text-center text-[0.9375rem] font-semibold"
+              style={{ backgroundImage: 'var(--gradient-cta)', color: 'var(--on-brand)' }}
             >
               Get the app
             </a>
