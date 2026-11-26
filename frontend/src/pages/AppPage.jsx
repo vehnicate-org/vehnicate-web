@@ -4,11 +4,11 @@ import { ArrowDown, ArrowLeft, ArrowRight, BatteryCharging, Camera, Check, Clock
 import { LINKS } from '../utils/constants'
 
 const STEPS = [
-  { n: '01', title: 'Install & sign in', time: '1 min', text: 'Get Vehnicate from Google Play and create your account.', detail: 'Your account opens to your Ellar balance and trip dashboard.', image: '/app_homepage.png', alt: 'Vehnicate home screen with Ellar balance', icon: Smartphone },
-  { n: '02', title: 'Allow camera access', time: '10 sec', text: 'Camera access lets the app identify potholes and speedbreakers while you travel.', detail: 'Video is processed on your device and is not uploaded.', image: '/dataCollection_screen.jpeg', alt: 'Vehnicate camera data collection screen', icon: Camera },
-  { n: '03', title: 'Allow location access', time: '10 sec', text: 'Location attaches the right place to each road observation.', detail: 'Only confirmed defect locations are shared anonymously.', image: '/appOnMount.png', alt: 'Vehnicate location and trip setup screen', icon: MapPin },
-  { n: '04', title: 'Keep the app running', time: '30 sec', text: 'Allow background activity so a trip can continue with your screen off.', detail: 'Some Android phones ask you to adjust battery optimization.', image: '/garage.jpeg', alt: 'Vehnicate running in the background on a phone', icon: BatteryCharging },
-  { n: '05', title: 'Mount up and drive', time: 'Ready', text: 'Secure your phone before setting off, open a trip, and drive as usual.', detail: 'Your first confirmed road observations can earn Ellars.', image: '/analysis.png', alt: 'Vehnicate trip analytics screen', icon: Check },
+  { n: '01', title: 'Install & sign in', time: '1 min', text: 'Get vehnWay from Google Play and create your account.', detail: 'Your account opens to your Ellar balance and trip dashboard.', image: '/app_homepage.png', alt: 'vehnWay home screen with Ellar balance', icon: Smartphone },
+  { n: '02', title: 'Allow camera access', time: '10 sec', text: 'Camera access lets the app identify potholes and speedbreakers while you travel.', detail: 'Video is processed on your device and is not uploaded.', image: '/dataCollection_screen.jpeg', alt: 'vehnWay camera data collection screen', icon: Camera },
+  { n: '03', title: 'Allow location access', time: '10 sec', text: 'Location attaches the right place to each road observation.', detail: 'Only confirmed defect locations are shared anonymously.', image: '/appOnMount.png', alt: 'vehnWay location and trip setup screen', icon: MapPin },
+  { n: '04', title: 'Keep the app running', time: '30 sec', text: 'Allow background activity so a trip can continue with your screen off.', detail: 'Some Android phones ask you to adjust battery optimization.', image: '/garage.jpeg', alt: 'vehnWay running in the background on a phone', icon: BatteryCharging },
+  { n: '05', title: 'Mount up and drive', time: 'Ready', text: 'Secure your phone before setting off, open a trip, and drive as usual.', detail: 'Your first confirmed road observations can earn Ellars.', image: '/analysis.png', alt: 'vehnicate trip analytics screen', icon: Check },
 ]
 
 const PERMISSIONS = [
@@ -59,10 +59,10 @@ const AppPage = () => {
             <AnimatePresence mode="wait" initial={false}>
               <motion.div className="app-slide-copy" key={`copy-${current.n}`} initial={reduceMotion ? false : { opacity: 0, x: -18 }} animate={{ opacity: 1, x: 0 }} exit={reduceMotion ? undefined : { opacity: 0, x: 18 }} transition={{ duration: reduceMotion ? 0 : .32, ease: [.22, 1, .36, 1] }}>
                 <span className="label">STEP {current.n} <span className="app-step-time">{current.time}</span></span><div className="app-step-icon"><CurrentIcon size={19} /></div><h2>{current.title}</h2><p>{current.text}</p><div className="app-step-detail"><ShieldCheck size={16} /><span>{current.detail}</span></div>
-                {current.n === '04' && <details className="app-device-help"><summary>Battery settings not showing?</summary><p>Open your phone’s battery settings and allow Vehnicate to run in the background. The exact steps vary by Android manufacturer.</p></details>}
+                {current.n === '04' && <details className="app-device-help"><summary>Battery settings not showing?</summary><p>Open your phone’s battery settings and allow vehnWay to run in the background. The exact steps vary by Android manufacturer.</p></details>}
                 <div className="app-slide-controls"><button type="button" onClick={() => goToStep(Math.max(0, active - 1))} disabled={active === 0}><ArrowLeft size={15} /> Previous</button><button type="button" onClick={() => goToStep(Math.min(STEPS.length - 1, active + 1))} disabled={active === STEPS.length - 1}>Next <ArrowRight size={15} /></button></div>
               </motion.div>
-              <motion.figure className="app-slide-image" key={`image-${current.n}`} initial={reduceMotion ? false : { opacity: 0, scale: .98 }} animate={{ opacity: 1, scale: 1 }} exit={reduceMotion ? undefined : { opacity: 0, scale: 1.01 }} transition={{ duration: reduceMotion ? 0 : .35 }}><img src={current.image} alt={current.alt} /><figcaption>VEHNICATE APP <span>{current.n} / {STEPS.length.toString().padStart(2, '0')}</span></figcaption></motion.figure>
+              <motion.figure className="app-slide-image" key={`image-${current.n}`} initial={reduceMotion ? false : { opacity: 0, scale: .98 }} animate={{ opacity: 1, scale: 1 }} exit={reduceMotion ? undefined : { opacity: 0, scale: 1.01 }} transition={{ duration: reduceMotion ? 0 : .35 }}><img src={current.image} alt={current.alt} /><figcaption>vehnWay <span>{current.n} / {STEPS.length.toString().padStart(2, '0')}</span></figcaption></motion.figure>
             </AnimatePresence>
           </div>
         </div>

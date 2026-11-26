@@ -27,9 +27,43 @@ const Layout = () => {
   }, [location.pathname])
 
   useLayoutEffect(() => {
-    if (location.hash) return
+    document.documentElement.style.scrollBehavior = 'auto'
     if (window.__lenis) window.__lenis.scrollTo(0, { immediate: true })
-    else window.scrollTo(0, 0)
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' })
+    window.requestAnimationFrame(() => { document.documentElement.style.scrollBehavior = '' })
+  }, [location.pathname])
+
+  useEffect(() => {
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    if (reduceMotion) return undefined
+
+    const targets = document.querySelectorAll([
+      'main .display-heading',
+      'main .impact-card',
+      'main .platform-card',
+      'main .compare-card',
+      'main .app-permission-card',
+      'main .product-bento-card',
+      'main .product-story-visual',
+      'main .merchant-feature',
+      'main .growth-point',
+      'main .vmn-flow-card',
+    ].join(','))
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return
+        entry.target.classList.add('site-motion-visible')
+        observer.unobserve(entry.target)
+      })
+    }, { threshold: .12, rootMargin: '0px 0px -5% 0px' })
+
+    targets.forEach((target) => {
+      // Framer Motion owns elements that already declare inline animation styles.
+      if (target.hasAttribute('style') || target.parentElement?.closest('[style*="opacity"], [style*="transform"], [style*="translate"]')) return
+      target.classList.add('site-motion-item')
+      observer.observe(target)
+    })
+    return () => observer.disconnect()
   }, [location.pathname])
 
   return (

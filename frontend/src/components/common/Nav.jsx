@@ -1,15 +1,11 @@
 import { useEffect, useState } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
-import { Moon, Sun } from 'lucide-react'
 import { NAV_LINKS, LINKS } from '../../utils/constants'
 
 const ALL_LINKS = [{ name: 'Home', href: '/' }, ...NAV_LINKS]
 
 const Nav = () => {
   const [open, setOpen] = useState(false)
-  const [theme, setTheme] = useState(() =>
-    document.documentElement.getAttribute('data-theme') || 'light'
-  )
   const location = useLocation()
 
   useEffect(() => setOpen(false), [location.pathname])
@@ -21,13 +17,6 @@ const Nav = () => {
     }
   }, [open])
 
-  const toggleTheme = () => {
-    const next = theme === 'dark' ? 'light' : 'dark'
-    setTheme(next)
-    document.documentElement.setAttribute('data-theme', next)
-    localStorage.setItem('vehnicate-theme', next)
-  }
-
   return (
     <header
       className="sticky top-0 z-40 border-b backdrop-blur"
@@ -35,8 +24,7 @@ const Nav = () => {
     >
       <nav className="container-x flex h-[60px] items-center gap-6">
         <Link to="/" className="flex items-center">
-          <img src="/hn-logo_light.png" alt="vehnicate" className="logo-dark h-8 w-auto" />
-          <img src="/hn-logo_dark.png" alt="vehnicate" className="logo-light h-8 w-auto" />
+          <img src="/hn-logo_light.png" alt="vehnicate" className="h-8 w-auto" />
         </Link>
 
         <div className="hidden items-center gap-6 lg:flex">
@@ -62,14 +50,6 @@ const Nav = () => {
         </div>
 
         <div className="ml-auto flex items-center gap-3">
-          <button
-            onClick={toggleTheme}
-            aria-label="toggle theme"
-            className="rounded-md border p-1.5"
-            style={{ borderColor: 'var(--border)', color: 'var(--text-body)' }}
-          >
-            {theme === 'dark' ? <Sun size={16} /> : <Moon size={16} />}
-          </button>
           <a
             href={LINKS.app}
             target="_blank"

@@ -1,87 +1,93 @@
 import { useEffect, useRef, useState } from 'react'
+import { fetchPublicStats } from '../../utils/publicStats'
 
-const STATS_URL = import.meta.env.VITE_STATS_API_URL || '/api/stats'
-
-const format = (n) => {
-  if (n >= 1_000_000) return `${(n / 1_000_000).toFixed(1)}M`
-  if (n >= 1_000) return n.toLocaleString('en-IN')
-  return String(n)
+const format = (value) => {
+  if (!Number.isFinite(value)) return '—'
+  if (value >= 1_000_000) return `${(value / 1_000_000).toFixed(1)}M`
+  return value.toLocaleString('en-IN', { maximumFractionDigits: 1 })
 }
 
-// dashboard-style metrics strip: mono numerals, hairline dividers, skeletons
-const MetricStrip = ({ items }) => {
-  const [stats, setStats] = useState(null)
-  const [failed, setFailed] = useState(false)
-  const ref = useRef(null)
-  const counted = useRef(false)
+function MetricValue({ value }) {
+  const [display, setDisplay] = useState(format(0))
+  const lastValue = useRef(0)
+  const numberRef = useRef(null)
 
   useEffect(() => {
+    const target = Number(value)
+    let frame = 0
+
+    const animate = () => {
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        lastValue.current = target
+        setDisplay(format(target))
+        return
+      }
+
+      const from = lastValue.current
+      const start = performance.now()
+      const duration = 1100
+      const precision = Number.isInteger(target) ? 1 : 10
+      const tick = (now) => {
+        const progress = Math.min((now - start) / duration, 1)
+        const eased = 1 - Math.pow(1 - progress, 3)
+        const current = from + (target - from) * eased
+        setDisplay(format(Math.round(current * precision) / precision))
+        if (progress < 1) frame = requestAnimationFrame(tick)
+        else lastValue.current = target
+      }
+      frame = requestAnimationFrame(tick)
+    }
+
+    const element = numberRef.current
+    if (!element || typeof IntersectionObserver === 'undefined') {
+      animate()
+      return () => cancelAnimationFrame(frame)
+    }
+
+    const observer = new IntersectionObserver(([entry]) => {
+      if (!entry.isIntersecting) return
+      observer.disconnect()
+      animate()
+    }, { threshold: .25 })
+    observer.observe(element)
+    return () => {
+      observer.disconnect()
+      cancelAnimationFrame(frame)
+    }
+  }, [value])
+
+  return <p ref={numberRef} className="metric-number" style={{ color: 'var(--text)' }}>{display}</p>
+}
+
+const MetricStrip = ({ items }) => {
+  const [stats, setStats] = useState(null)
+
+  useEffect(() => {
+    const controller = new AbortController()
     let alive = true
-    fetch(STATS_URL)
-      .then((r) => (r.ok ? r.json() : Promise.reject(r.status)))
-      .then((data) => alive && setStats(data))
-      .catch(() => alive && setFailed(true))
+
+    const refresh = async () => {
+      const result = await fetchPublicStats(controller.signal)
+      if (alive) setStats(result)
+    }
+
+    refresh()
+    const interval = window.setInterval(refresh, 60_000)
     return () => {
       alive = false
+      controller.abort()
+      window.clearInterval(interval)
     }
   }, [])
 
-  useEffect(() => {
-    if (!stats || counted.current) return
-    const obs = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          counted.current = true
-          entry.target.querySelectorAll('[data-count]').forEach((el) => {
-            const target = Number(el.dataset.count)
-            if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-              el.textContent = format(target)
-              return
-            }
-            const start = performance.now()
-            const dur = 1200
-            const tick = (now) => {
-              const p = Math.min((now - start) / dur, 1)
-              const eased = 1 - Math.pow(1 - p, 3)
-              el.textContent = format(Math.round(target * eased))
-              if (p < 1) requestAnimationFrame(tick)
-            }
-            requestAnimationFrame(tick)
-          })
-          obs.disconnect()
-        }
-      },
-      { threshold: 0.4 }
-    )
-    if (ref.current) obs.observe(ref.current)
-    return () => obs.disconnect()
-  }, [stats])
-
   return (
-    <div
-      ref={ref}
-      className="grid grid-cols-1 gap-px min-[800px]:grid-cols-4"
-      style={{ background: 'var(--border)' }}
-    >
+    <div className="grid grid-cols-1 gap-px min-[800px]:grid-cols-4" style={{ background: 'var(--border)' }}>
       {items.map((item) => {
-        const value = stats ? stats[item.key] : null
-        const ready = value !== null && value !== undefined
+        const value = stats?.[item.key]
         return (
           <div key={item.key} className="px-5 py-4" style={{ background: 'var(--bg-elevated)' }}>
-            {!stats || failed || !ready ? (
-              <div className="skeleton h-8 w-24" aria-hidden="true" />
-            ) : (
-              <p
-                data-count={value}
-                className="font-mono text-[1.75rem] font-semibold leading-none"
-                style={{ color: 'var(--text)' }}
-              >
-                {format(0)}
-              </p>
-            )}
-            <p className="mt-2 text-[0.875rem]" style={{ color: 'var(--text-muted)' }}>
-              {item.label}
-            </p>
+            {stats === null ? <div className="skeleton h-8 w-24" aria-hidden="true" /> : value == null ? <p className="metric-number" style={{ color: 'var(--text)' }}>—</p> : <MetricValue value={value} />}
+            <p className="mt-2 text-[0.875rem]" style={{ color: 'var(--text-muted)' }}>{item.label}</p>
           </div>
         )
       })}

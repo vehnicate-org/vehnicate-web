@@ -26,7 +26,7 @@ const MapPage = () => {
         <div className="container-x">
           <div className="map-preview-heading"><h1 className="display-heading">Map of <span>road defects.</span></h1></div>
           <p className="map-preview-lede">Once your drive is complete, the road defects you drove over are added to the map anonymously. No names. No personal routes. Just useful information for the next driver.</p>
-          <div className="map-video-frame"><video ref={videoRef} src="/map_recording.mp4" muted loop playsInline preload="metadata" controls aria-label="Preview of the Vehnicate road defects map" /></div>
+          <div className="map-video-frame"><video ref={videoRef} src="/map_recording.mp4" muted loop playsInline preload="metadata" controls aria-label="Preview of the vehnicate road defects map" /></div>
           <div className="map-preview-action"><div><strong>Explore the road defects map</strong><span>See reported road hazards in the live map.</span></div><a className="map-external-link" href={PUBLIC_MAP} target="_blank" rel="noopener noreferrer">Go to maps <ArrowUpRight size={17} /></a></div>
         </div>
       </section>

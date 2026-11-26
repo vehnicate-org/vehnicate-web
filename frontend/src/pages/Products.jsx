@@ -7,38 +7,32 @@ import './Products.css'
 
 const PRODUCTS = [
   {
-    number: '01',
     key: 'maps',
     name: 'Road defect maps',
-    category: 'PUBLIC ROAD INTELLIGENCE',
     description: 'Explore anonymously mapped potholes and speedbreakers reported by drivers on the road.',
     image: '/hn_maps.png',
-    alt: 'Vehnicate road defect map with anonymously collected road reports',
+    alt: 'vehnicate road defect map with anonymously collected road reports',
     href: '/map',
     action: 'See the map preview',
     direct: 'https://www.vehnicate.com/map',
     directAction: 'Open live map',
   },
   {
-    number: '02',
     key: 'dashboard',
     name: 'Analytics dashboard',
-    category: 'AGGREGATE INSIGHTS',
-    description: 'View network-level road data and aggregated activity through the Vehnicate dashboard.',
+    description: 'View network-level road data and aggregated activity through the vehnicate dashboard.',
     image: '/hn_dashboard.png',
-    alt: 'Vehnicate Driving Analytics dashboard with road intelligence and activity charts',
+    alt: 'vehnicate Driving Analytics dashboard with road intelligence and activity charts',
     href: LINKS.dashboard,
     action: 'Open dashboard',
     external: true,
   },
   {
-    number: '03',
     key: 'app',
-    name: 'Vehnicate app',
-    category: 'FOR ANDROID DRIVERS',
+    name: 'vehnWay',
     description: 'Detect road defects during your drives, build safer maps and earn Ellars along the way.',
     image: '/app_homepage.png',
-    alt: 'Vehnicate Android app displayed on a phone',
+    alt: 'vehnWay Android app displayed on a phone',
     href: '/app',
     action: 'Explore the app',
     store: LINKS.app,
@@ -75,7 +69,6 @@ function RoadNetwork() {
           <motion.circle key={`${cx}-${cy}`} cx={cx} cy={cy} r={index < 5 ? 4 : 2.5} fill={index < 5 ? '#D98EC9' : '#AA78CA'} initial={{ opacity: .28 }} animate={reduceMotion ? { opacity: .8 } : { opacity: [.28,.9,.28] }} transition={reduceMotion ? { duration: 0 } : { duration: 3.4, delay: index * .18, repeat: Infinity, ease: 'easeInOut' }} />
         ))}
       </svg>
-      <span className="products-network-caption">A network built from every journey</span>
     </div>
   )
 }
@@ -102,8 +95,6 @@ function ProductShowcase({ product, reverse = false }) {
     <section ref={ref} className={`product-story ${reverse ? 'product-story-reverse' : ''} product-story-${product.key}`} aria-labelledby={`product-title-${product.key}`}>
       <div className="container-x product-story-grid">
         <motion.div className="product-story-copy" variants={textVariants} initial={reduceMotion ? false : 'hidden'} whileInView="show" viewport={{ once: true, amount: .25 }}>
-          <motion.span variants={itemVariants} className="product-story-number">{product.number} <i>—</i> 03</motion.span>
-          <motion.span variants={itemVariants} className="product-category">{product.category}</motion.span>
           <motion.h2 variants={itemVariants} id={`product-title-${product.key}`}>{product.name}</motion.h2>
           <motion.p variants={itemVariants}>{product.description}</motion.p>
           <motion.div variants={itemVariants}><ProductActions product={product} /></motion.div>
@@ -112,7 +103,6 @@ function ProductShowcase({ product, reverse = false }) {
           <div className="product-visual-frame">
             <img src={product.image} alt={product.alt} loading="lazy" />
           </div>
-          {product.key === 'app' && <figcaption>VEHNICATE FOR ANDROID <span>GOOGLE PLAY</span></figcaption>}
         </motion.figure>
       </div>
     </section>
@@ -138,13 +128,13 @@ const Products = () => {
           <div className="products-overview-heading"><h2 id="products-overview-title">One network.<br />Three ways in.</h2><p>From the driver's phone to the wider road network, each product has a part to play.</p></div>
           <div className="products-bento">
             <article className="product-bento-card product-bento-app">
-              <div className="product-bento-copy"><span className="product-story-number">{PRODUCTS[2].number} <i>—</i> 03</span><span className="product-category">{PRODUCTS[2].category}</span><h3>{PRODUCTS[2].name}</h3><p>{PRODUCTS[2].description}</p><ProductLink href={PRODUCTS[2].href}>{PRODUCTS[2].action}</ProductLink><a href={PRODUCTS[2].store} target="_blank" rel="noopener noreferrer" className="product-bento-secondary">Google Play <ArrowUpRight size={15} /></a></div>
+              <div className="product-bento-copy"><h3>{PRODUCTS[2].name}</h3><p>{PRODUCTS[2].description}</p><ProductLink href={PRODUCTS[2].href}>{PRODUCTS[2].action}</ProductLink><a href={PRODUCTS[2].store} target="_blank" rel="noopener noreferrer" className="product-bento-secondary">Google Play <ArrowUpRight size={15} /></a></div>
               <div className="product-bento-app-art"><img src={PRODUCTS[2].image} alt={PRODUCTS[2].alt} loading="lazy" /></div>
             </article>
             {[PRODUCTS[0], PRODUCTS[1]].map((product) => (
               <article className={`product-bento-card product-bento-${product.key}`} key={product.key}>
-                <div className="product-bento-visual"><img src={product.image} alt={product.alt} loading="lazy" /><span>{product.number} / 03</span></div>
-                <div className="product-bento-copy"><span className="product-category">{product.category}</span><h3>{product.name}</h3><ProductLink href={product.href} external={product.external}>{product.action}</ProductLink>{product.direct && <a href={product.direct} target="_blank" rel="noopener noreferrer" className="product-bento-secondary">Open live map <ArrowUpRight size={15} /></a>}</div>
+                <div className="product-bento-visual"><img src={product.image} alt={product.alt} loading="lazy" /></div>
+                <div className="product-bento-copy"><h3>{product.name}</h3><p>{product.description}</p><ProductLink href={product.href} external={product.external}>{product.action}</ProductLink>{product.direct && <a href={product.direct} target="_blank" rel="noopener noreferrer" className="product-bento-secondary">Open live map <ArrowUpRight size={15} /></a>}</div>
               </article>
             ))}
           </div>

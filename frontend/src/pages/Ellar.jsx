@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react'
 import { motion, useReducedMotion } from 'framer-motion'
-import { ArrowRight, ArrowUpRight, Coins, Store } from 'lucide-react'
+import { ArrowUpRight, BadgeCheck, CarFront, Store } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { PrimaryButton } from '../components/ui/Button'
+import EllarOrbit from '../components/sections/EllarOrbit'
 
 const TOTALS_URL = 'https://vehnicate-mapsellar-production.up.railway.app/public/ellar-totals'
 
@@ -29,8 +30,8 @@ const Ellar = () => {
       <section className="section-pad interior-hero ellar-hero">
         <div className="container-x">
           <h1 className="display-heading">The <span className="hero-gradient">Ellar.</span></h1>
-          <p className="interior-lede mt-5 max-w-[62ch]">A reward for helping make roads safer. Earn Ellars through road observations, then use them with businesses in the Vehnicate Merchant Network.</p>
-          <motion.div className="ellar-coin-hero" aria-hidden="true" initial={reduceMotion ? false : { opacity: 0, scale: .92 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: reduceMotion ? 0 : .8, ease: [.22, 1, .36, 1] }}><Coins size={54} strokeWidth={1.1} /><span>e</span></motion.div>
+          <p className="interior-lede mt-5 max-w-[62ch]">A reward for helping make roads safer. Earn Ellars through road observations, then use them with businesses in the vehnicate Merchant Network.</p>
+          <EllarOrbit className="ellar-hero-orbit" />
           <div className="ellar-totals" aria-live="polite"><div><small>TOTAL FROZEN</small><strong>{totals ? Number(totals.frozen_ellar || 0).toFixed(2) : '—'}</strong><span>Ellars</span></div><div><small>TOTAL LIQUID</small><strong>{totals ? Number(totals.liquid_ellar || 0).toFixed(2) : '—'}</strong><span>Ellars</span></div><p>Network totals update periodically.</p></div>
         </div>
       </section>
@@ -40,11 +41,28 @@ const Ellar = () => {
       </section>
 
       <section className="ellar-mechanics border-t" style={{ borderColor: 'var(--border)' }}>
-        <div className="container-x section-pad"><h2 className="display-heading">From road signal<br />to real-world use.</h2><div className="ellar-mechanics-grid">
-          <motion.article initial={reduceMotion ? false : { opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: .3 }} transition={{ duration: reduceMotion ? 0 : .55 }}><span className="ellar-step">01</span><div className="ellar-step-icon"><Coins size={19} /></div><h3>Observe</h3><p>When the app detects a road defect, the observation can earn a discovery reward. The trip multiplier is <b>1.0</b> with a mounted camera and <b>0.5</b> with the camera off.</p><div className="ellar-formula">m = 1.0 <small>mounted, camera on</small><br />m = 0.5 <small>camera off</small></div></motion.article>
-          <motion.article initial={reduceMotion ? false : { opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: .3 }} transition={{ duration: reduceMotion ? 0 : .55, delay: .08 }}><span className="ellar-step">02</span><div className="ellar-step-icon"><ArrowRight size={19} /></div><h3>Verify</h3><p>Another driver's observation can confirm a reported defect. Confirmation rewards go to the liquid balance; the discoverer's frozen reward is released when the report is confirmed.</p><div className="ellar-formula">R<sub>confirmation</sub> = m(2 − log<sub>10</sub>n<sub>D</sub>)</div></motion.article>
-          <motion.article initial={reduceMotion ? false : { opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: .3 }} transition={{ duration: reduceMotion ? 0 : .55, delay: .16 }}><span className="ellar-step">03</span><div className="ellar-step-icon"><Store size={19} /></div><h3>Use</h3><p>Spend liquid Ellars with participating vMN merchants. Today, Muthaaramman Mini Supermarket is the first shop in the network.</p><Link to="/vmn" className="ellar-inline-link">Find a vMN merchant <ArrowUpRight size={15} /></Link></motion.article>
-        </div><p className="ellar-note">Reward rules are subject to app verification and may change as the network develops.</p></div>
+        <div className="container-x section-pad">
+          <h2 className="display-heading">From road signal<br />to real-world use.</h2>
+          <p className="ellar-journey-intro">A road observation becomes a reward through three connected stages.</p>
+          <div className="ellar-mechanics-grid">
+            <motion.article initial={reduceMotion ? false : { opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: .3 }} transition={{ duration: reduceMotion ? 0 : .5 }}>
+              <span className="ellar-step">01</span><div className="ellar-step-icon"><CarFront size={19} /></div><h3>Observe</h3>
+              <p>When the app detects a road defect, the observation can earn a discovery reward.</p>
+              <div className="ellar-formula">m = 1.0 <small>mounted camera on</small><br />m = 0.5 <small>camera off</small></div>
+            </motion.article>
+            <motion.article initial={reduceMotion ? false : { opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: .3 }} transition={{ duration: reduceMotion ? 0 : .5, delay: reduceMotion ? 0 : .08 }}>
+              <span className="ellar-step">02</span><div className="ellar-step-icon"><BadgeCheck size={19} /></div><h3>Verify</h3>
+              <p>Another driver's observation can confirm a reported defect. Confirmation rewards go to the liquid balance; the discoverer's frozen reward is released when the report is confirmed.</p>
+              <div className="ellar-formula">R<sub>confirmation</sub> = m(2 − log<sub>10</sub>n<sub>D</sub>)<br /><small>confirmation reward formula</small></div>
+            </motion.article>
+            <motion.article initial={reduceMotion ? false : { opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: .3 }} transition={{ duration: reduceMotion ? 0 : .5, delay: reduceMotion ? 0 : .16 }}>
+              <span className="ellar-step">03</span><div className="ellar-step-icon"><Store size={19} /></div><h3>Use</h3>
+              <p>Spend liquid Ellars with participating vMN merchants. Today, Muthaaramman Mini Supermarket is the first shop in the network.</p>
+              <Link to="/vmn" className="ellar-inline-link">Find a vMN merchant <ArrowUpRight size={15} /></Link>
+            </motion.article>
+          </div>
+          <p className="ellar-note">Reward rules are subject to app verification and may change as the network develops.</p>
+        </div>
       </section>
 
       <section className="ellar-future border-t" style={{ borderColor: 'var(--border)' }}>

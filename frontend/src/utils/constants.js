@@ -4,7 +4,7 @@ export const LINKS = {
   linkedin: 'https://www.linkedin.com/company/vehnicate/',
   youtube: 'https://www.youtube.com/channel/UCrgjnbIM-6sNmaLem3Qmntg',
   instagram: 'https://www.instagram.com/vehnicate/',
-  email: 'vehnicate.web@gmail.com',
+  email: 'vehnicate@gmail.com',
   phone: '+91 77081 61551',
 }
 

@@ -6,14 +6,14 @@ import { PrimaryButton } from '../components/ui/Button'
 import { LINKS } from '../utils/constants'
 
 const STEPS = [
-  { id: 'step-install', n: '01', title: 'Install the app', text: 'Download Vehnicate from Google Play and create your account.', image: '/appOnMount.png', alt: 'Vehnicate app setup screen', icon: Smartphone, note: 'A one-time setup. Takes about a minute.' },
+  { id: 'step-install', n: '01', title: 'Install the app', text: 'Download vehnWay from Google Play and create your account.', image: '/appOnMount.png', alt: 'vehnWay app setup screen', icon: Smartphone, note: 'A one-time setup. Takes about a minute.' },
   { id: 'step-mount', n: '02', title: 'Choose your setup', text: 'Mount your phone so the camera can see the road. No mount? Pocket mode still works.', image: '/phone_on_bike.png', alt: 'Phone mounted for a drive', icon: Camera, note: 'Mounted trips earn 2× Ellars.' },
-  { id: 'step-drive', n: '03', title: 'Drive like you always do', text: 'Start a trip and keep your attention on the road. Detection runs in the background.', image: '/phone_on_car2.png', alt: 'Phone running Vehnicate during a drive', icon: MapPin, note: 'Video is processed on your phone.' },
-  { id: 'step-earn', n: '04', title: 'Earn and use Ellars', text: 'Confirmed road defects earn Ellars. Use them with participating vMN merchants.', image: '/incentives.png', alt: 'Ellar rewards in the Vehnicate app', icon: Wallet, note: 'Useful road data. Real rewards.' },
+  { id: 'step-drive', n: '03', title: 'Drive like you always do', text: 'Start a trip and keep your attention on the road. Detection runs in the background.', image: '/phone_on_car2.png', alt: 'Phone running vehnWay during a drive', icon: MapPin, note: 'Video is processed on your phone.' },
+  { id: 'step-earn', n: '04', title: 'Earn and use Ellars', text: 'Confirmed road defects earn Ellars. Use them with participating vMN merchants.', image: '/incentives.png', alt: 'Ellar rewards in vehnWay', icon: Wallet, note: 'Useful road data. Real rewards.' },
 ]
 
 const FAQ_ITEMS = [
-  { q: 'Does Vehnicate drain my battery?', a: 'Detection runs on-device and pauses when your vehicle is still. Battery use varies by device, camera settings and trip length.' },
+  { q: 'Does vehnicate drain my battery?', a: 'Detection runs on-device and pauses when your vehicle is still. Battery use varies by device, camera settings and trip length.' },
   { q: 'What happens to my video and location?', a: 'Video is processed on your phone and is not uploaded. Confirmed road defect locations are shared anonymously; personal routes and trip histories are not published.' },
   { q: 'Which phones can use the app?', a: 'The app currently works on Android phones that support Google Play services. A working camera and GPS help improve detection and location accuracy.' },
   { q: 'How are defects confirmed?', a: 'The app detects possible potholes and speedbreakers. Observations are cross-checked as other drivers encounter the same location before they are treated as confirmed map data.' },
@@ -38,7 +38,7 @@ const What = () => {
       <section className="section-pad interior-hero">
         <div className="container-x">
           <h1 className="display-heading max-w-3xl">A better drive starts with one small setup.</h1>
-          <p className="interior-lede mt-5 max-w-[60ch]">Set up Vehnicate once. Then your everyday journeys help map road defects, and confirmed observations earn you Ellars.</p>
+          <p className="interior-lede mt-5 max-w-[60ch]">Set up vehnicate once. Then your everyday journeys help map road defects, and confirmed observations earn you Ellars.</p>
           <a className="inline-flex items-center gap-2 mt-7 text-sm" href="#setup" style={{ color: 'var(--text)' }}>See the four steps <ArrowDown size={15} /></a>
         </div>
       </section>
@@ -67,7 +67,7 @@ const What = () => {
                 <AnimatePresence mode="wait" initial={false}>
                   <motion.div key={active} className="setup-showcase-frame" initial={reduceMotion ? { opacity: 1 } : { opacity: 0, y: 18, scale: .985 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={reduceMotion ? { opacity: 1 } : { opacity: 0, y: -12, scale: .99 }} transition={{ duration: reduceMotion ? 0 : .42, ease: [.22, 1, .36, 1] }}>
                     <img src={STEPS[active].image} alt={STEPS[active].alt} />
-                    <div className="setup-showcase-caption"><span>VEHNICATE / {STEPS[active].n}</span><strong>{STEPS[active].title}</strong></div>
+                    <div className="setup-showcase-caption"><span>vehnicate / {STEPS[active].n}</span><strong>{STEPS[active].title}</strong></div>
                   </motion.div>
                 </AnimatePresence>
               </div>
