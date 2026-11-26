@@ -6,10 +6,10 @@ import { PrimaryButton } from '../components/ui/Button'
 import { LINKS } from '../utils/constants'
 
 const STEPS = [
-  { id: 'step-install', n: '01', title: 'Install the app', text: 'Download vehnWay from Google Play and create your account.', image: '/appOnMount.png', alt: 'vehnWay app setup screen', icon: Smartphone, note: 'A one-time setup. Takes about a minute.' },
-  { id: 'step-mount', n: '02', title: 'Choose your setup', text: 'Mount your phone so the camera can see the road. No mount? Pocket mode still works.', image: '/phone_on_bike.png', alt: 'Phone mounted for a drive', icon: Camera, note: 'Mounted trips earn 2× Ellars.' },
-  { id: 'step-drive', n: '03', title: 'Drive like you always do', text: 'Start a trip and keep your attention on the road. Detection runs in the background.', image: '/phone_on_car2.png', alt: 'Phone running vehnWay during a drive', icon: MapPin, note: 'Video is processed on your phone.' },
-  { id: 'step-earn', n: '04', title: 'Earn and use Ellars', text: 'Confirmed road defects earn Ellars. Use them with participating vMN merchants.', image: '/incentives.png', alt: 'Ellar rewards in vehnWay', icon: Wallet, note: 'Useful road data. Real rewards.' },
+  { id: 'step-install', n: '01', title: 'Install app', text: 'Download vehnWay from Google Play and create your account.', image: '/mobile_landing_page.png', alt: 'vehnWay app landing screen', icon: Smartphone, note: 'A one-time setup. Takes about a minute.' },
+  { id: 'step-mount', n: '02', title: 'Choose your setup', text: 'Mount your phone so the camera can see the road. No mount? Pocket mode still works.', image: '/appOnMount.png', alt: 'vehnWay mounted setup screen', icon: Camera, note: 'Mounted trips earn 2× Ellars.' },
+  { id: 'step-drive', n: '03', title: 'Drive like you always do', text: 'Start a trip and keep your attention on the road. Detection runs in the background.', image: '/istockphoto-1197798630-612x612.jpg', alt: 'A driver travelling on the road', icon: MapPin, note: 'Video is processed on your phone.' },
+  { id: 'step-earn', n: '04', title: 'Earn and use Ellars', text: 'Confirmed road defects earn Ellars. Use them with participating vMN merchants.', image: '/mobile_ellar_page.png', alt: 'Ellar rewards screen in vehnWay', icon: Wallet, note: 'Useful road data. Real rewards.' },
 ]
 
 const FAQ_ITEMS = [
@@ -67,7 +67,6 @@ const What = () => {
                 <AnimatePresence mode="wait" initial={false}>
                   <motion.div key={active} className="setup-showcase-frame" initial={reduceMotion ? { opacity: 1 } : { opacity: 0, y: 18, scale: .985 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={reduceMotion ? { opacity: 1 } : { opacity: 0, y: -12, scale: .99 }} transition={{ duration: reduceMotion ? 0 : .42, ease: [.22, 1, .36, 1] }}>
                     <img src={STEPS[active].image} alt={STEPS[active].alt} />
-                    <div className="setup-showcase-caption"><span>vehnicate / {STEPS[active].n}</span><strong>{STEPS[active].title}</strong></div>
                   </motion.div>
                 </AnimatePresence>
               </div>
